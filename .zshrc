@@ -77,7 +77,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting fasd)
 # plugins=(git zsh-autosuggestions zsh-syntax-highlighting fast-syntax-highlighting zsh-autocomplete)
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=03'
@@ -145,6 +145,8 @@ alias ga="source /opt/ros/galactic/setup.zsh"
 alias fo="source /opt/ros/foxy/setup.zsh"
 alias r="ROS_DOMAIN_ID="
 alias p="cat ~/.pwd"
+alias gz="gedit ~/.zshrc"
+alias si="source install/setup.zsh"
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
 export PATH=$PATH:/usr/local/cuda/bin
@@ -191,6 +193,7 @@ export PYTHONPATH=$PYTHONPATH:${CARLA_ROOT}/PythonAPI/carla/dist/carla-0.9.13-py
 export PYTHONPATH=${PYTHONPATH}:${SCENARIO_RUNNER_ROOT}:${LEADERBOARD_ROOT}
 # use fast DDS instead of cyclone DDS to avoid broadcasting to all LAN
 source /opt/ros/galactic/setup.zsh
+export RCUTILS_COLORIZED_OUTPUT=1
 export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 # export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
 # setup seperate ros domain for running carla-autoware
@@ -211,9 +214,23 @@ export APOLLO_ROOT_DIR=/home/cjh/Project/apollo
 export CYCLONEDDS_URI=/home/cjh/Project/autoware/cyclonedds.xml
 export SUMO_HOME=/usr/share/sumo
 
-[[ -s /home/cjh/.autojump/etc/profile.d/autojump.sh ]] && source /home/cjh/.autojump/etc/profile.d/autojump.sh
-autoload -U compinit && compinit -u
-
 alias carla="/home/cjh/Project/CARLA_0.9.13-dirty/CarlaUE4.sh"
 alias m="python3 /home/cjh/Project/carla_test/main.py"
+
+# check if fasd is installed
+if (( ! ${+commands[fasd]} )); then
+  return
+fi
+
+fasd_cache="${ZSH_CACHE_DIR}/fasd-init-cache"
+if [[ "$commands[fasd]" -nt "$fasd_cache" || ! -s "$fasd_cache" ]]; then
+  fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install \
+    zsh-wcomp zsh-wcomp-install >| "$fasd_cache"
+fi
+source "$fasd_cache"
+unset fasd_cache
+
+alias v='f -e "$EDITOR"'
+alias o='a -e xdg-open'
+alias j='zz'
 

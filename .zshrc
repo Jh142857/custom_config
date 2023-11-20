@@ -146,7 +146,9 @@ alias fo="source /opt/ros/foxy/setup.zsh"
 alias r="ROS_DOMAIN_ID="
 alias p="cat ~/.pwd"
 alias gz="gedit ~/.zshrc"
+alias sz="source ~/.zshrc"
 alias si="source install/setup.zsh"
+alias xo="xdg-open"
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
 export PATH=$PATH:/usr/local/cuda/bin
@@ -176,7 +178,8 @@ export PYTHONPATH=$PYTHONPATH:/home/cjh/Explore_plan/habitat/habitat-sim
 
 # need by op_bridge
 # export CARLA_ROOT=/home/cjh/Project/CARLA_0.9.13
-export CARLA_ROOT=/home/cjh/Project/CARLA_0.9.13-new
+# export CARLA_ROOT=/home/cjh/Project/CARLA_0.9.13-dirty
+export CARLA_ROOT=/home/cjh/Project/CARLA_0.9.13-2023.11.17
 # export CARLA_ROOT=/home/cjh/Software/carla
 # export CARLA_ROOT=/home/cjh/Project/CARLA_0.9.14
 # export CARLA_ROOT=/home/cjh/Project/carla
@@ -207,14 +210,17 @@ export CARLA_AUTOWARE_DOCKER_ROOT=/home/cjh/Project/carla-autoware-docker
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-eval "$(register-python-argcomplete3 ros2)"
-eval "$(register-python-argcomplete3 colcon)"
 export LIBGL_ALWAYS_SOFTWARE=1
 export APOLLO_ROOT_DIR=/home/cjh/Project/apollo
 export CYCLONEDDS_URI=/home/cjh/Project/autoware/cyclonedds.xml
 export SUMO_HOME=/usr/share/sumo
 
-alias carla="/home/cjh/Project/CARLA_0.9.13-dirty/CarlaUE4.sh"
+alias carla="/home/cjh/Project/CARLA_0.9.13-2023.11.17/CarlaUE4.sh"
+alias ego="cd /home/cjh/Project/carla-ros-bridge && source install/setup.zsh && ros2 launch carla_ros_bridge carla_ros_bridge_with_example_ego_vehicle.launch.py"
+alias autoware="cd /home/cjh/Project/autoware && source install/setup.zsh && ros2 launch autoware_launch autoware_carla.launch.xml vehicle_model:=sample_vehicle sensor_model:=carla_sensor_kit map_path:=/home/cjh/Project/map/custom_junctions_with_boundary"
+alias aa="cd /home/cjh/Project/apollo-modules-ros2 && source install/setup.zsh && ros2 launch apollo_autoware_bridge aa_bridge_launch.xml"
+alias rr="ros2 daemon stop && ros2 daemon start"
+
 alias m="python3 /home/cjh/Project/carla_test/main.py"
 
 # check if fasd is installed
@@ -234,3 +240,11 @@ alias v='f -e "$EDITOR"'
 alias o='a -e xdg-open'
 alias j='zz'
 
+# Add TeX Live to the PATH, MANPATH, INFOPATH
+export PATH=/usr/local/texlive/2023/bin/x86_64-linux:$PATH
+export MANPATH=/usr/local/texlive/2023/texmf-dist/doc/man:$MANPATH
+export INFOPATH=/usr/local/texlive/2023/texmf-dist/doc/info:$INFOPATH
+
+source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
+eval "$(register-python-argcomplete3 ros2)"
+eval "$(register-python-argcomplete3 colcon)"

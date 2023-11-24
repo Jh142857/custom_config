@@ -217,7 +217,7 @@ export SUMO_HOME=/usr/share/sumo
 
 alias carla="/home/cjh/Project/CARLA_0.9.13-2023.11.17/CarlaUE4.sh"
 alias ego="cd /home/cjh/Project/carla-ros-bridge && source install/setup.zsh && ros2 launch carla_ros_bridge carla_ros_bridge_with_example_ego_vehicle.launch.py"
-alias autoware="cd /home/cjh/Project/autoware && source install/setup.zsh && ros2 launch autoware_launch autoware_carla.launch.xml vehicle_model:=sample_vehicle sensor_model:=carla_sensor_kit map_path:=/home/cjh/Project/map/custom_junctions_with_boundary"
+alias autoware="cd /home/cjh/Project/autoware && source install/setup.zsh && ros2 launch autoware_launch autoware_carla.launch.xml vehicle_model:=igv_vehicle sensor_model:=carla_sensor_kit map_path:=/home/cjh/Project/map/custom_junctions_with_boundary"
 alias aa="cd /home/cjh/Project/apollo-modules-ros2 && source install/setup.zsh && ros2 launch apollo_autoware_bridge aa_bridge_launch.xml"
 alias rr="ros2 daemon stop && ros2 daemon start"
 

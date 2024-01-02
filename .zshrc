@@ -54,7 +54,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # You can also set it to another string to have that shown instead of the default red dots.
 # e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
 # Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -78,13 +78,13 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting fasd)
-# plugins=(git zsh-autosuggestions zsh-syntax-highlighting fast-syntax-highlighting zsh-autocomplete)
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=03'
-bindkey '`' autosuggest-accept
+# bindkey '`' autosuggest-accept
 # zstyle ':completion:*'  list-colors '=*=90'
 
 source $ZSH/oh-my-zsh.sh
+# source $ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # User configuration
 
@@ -111,140 +111,133 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-export https_proxy=http://127.0.0.1:7890;
-export http_proxy=http://127.0.0.1:7890;
-# export all_proxy=socks5://127.0.0.1:7891
 
-xhost local:root > ~/.out
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('$HOME/Software/anaconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "$HOME/Software/anaconda/etc/profile.d/conda.sh" ]; then
+        . "$HOME/Software/anaconda/etc/profile.d/conda.sh"
+    else
+        export PATH="$HOME/Software/anaconda/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
 
-# source ~/Learn/catkin_ws/devel/setup.zsh
-# source ~/Explore_plan/tare_planner/devel/setup.zsh
-# source ~/Explore_plan/autonomous_exploration_development_environment/devel/setup.zsh
-# source /opt/ros/noetic/setup.zsh
-# source ./devel/setup.zsh 2> ~/.out
-# [[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile'
-# alias python=/usr/bin/python3.8
-function kros(){
-  ps -ef | grep ros | grep -v grep | awk {'print"kill -9 " $2'} | sh
-}
-function k(){
-  ps -ef | grep $1 | grep -v grep | awk {'print"kill -9 " $2'} | sh
-}
+# conda
 function c(){
   conda activate $1
 }
 function d(){
   conda activate base
 }
-alias zotero="sh ~/Software/Zotero_linux-x86_64/zotero"
-alias t="tmux"
-alias clion="sh /home/cjh/Software/clion-2023.1.2/bin/clion.sh"
-alias pycharm="sh /home/cjh/Software/pycharm-2023.1.2/bin/pycharm.sh"
-alias no="source /opt/ros/noetic/setup.zsh"
-alias ga="source /opt/ros/galactic/setup.zsh"
-alias fo="source /opt/ros/foxy/setup.zsh"
-alias r="ROS_DOMAIN_ID="
-alias p="cat ~/.pwd"
-alias gz="gedit ~/.zshrc"
-alias sz="source ~/.zshrc"
-alias si="source install/setup.zsh"
-alias xo="xdg-open"
 
+# Clash && VPN
+export https_proxy=http://127.0.0.1:7890
+export http_proxy=http://127.0.0.1:7890
+# export all_proxy=socks5://127.0.0.1:7891
+alias clash="cd ~/Software/clash && ./clash-linux-amd64-v1.10.0 -f glados.yaml -d ."
+
+# cuda
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
 export PATH=$PATH:/usr/local/cuda/bin
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/cjh/Software/anaconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/cjh/Software/anaconda/etc/profile.d/conda.sh" ]; then
-        . "/home/cjh/Software/anaconda/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/cjh/Software/anaconda/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-# export PYTHONPATH=$PYTHONPATH:/home/cjh/Learn/pyTest
-# export PYTHONPATH=$PYTHONPATH:/home/cjh/Explore_plan/diffuser
-# export PYTHONPATH=$PYTHONPATH:/home/cjh/Explore_plan/test_rl
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/cjh/.mujoco/mujoco210/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/nvidia
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
-export UE4_ROOT=~/Software/UnrealEngine_4.26
-export PYTHONPATH=$PYTHONPATH:/home/cjh/Explore_plan/habitat/habitat-sim
 
-# need by op_bridge
-# export CARLA_ROOT=/home/cjh/Project/CARLA_0.9.13
-# export CARLA_ROOT=/home/cjh/Project/CARLA_0.9.13-dirty
-export CARLA_ROOT=/home/cjh/Project/CARLA_0.9.13-2023.11.17
-# export CARLA_ROOT=/home/cjh/Software/carla
-# export CARLA_ROOT=/home/cjh/Project/CARLA_0.9.14
-# export CARLA_ROOT=/home/cjh/Project/carla
-export SCENARIO_RUNNER_ROOT=/home/cjh/Project/carla-autoware-stable/scenario_runner
-export LEADERBOARD_ROOT=/home/cjh/Project/carla-autoware-stable/op_bridge
-export TEAM_CODE_ROOT=/home/cjh/Project/carla-autoware-stable/op_agent
-export PYTHONPATH=$PYTHONPATH:${CARLA_ROOT}/PythonAPI
-export PYTHONPATH=$PYTHONPATH:${CARLA_ROOT}/PythonAPI/util
-export PYTHONPATH=$PYTHONPATH:${CARLA_ROOT}/PythonAPI/carla
-export PYTHONPATH=$PYTHONPATH:${CARLA_ROOT}/PythonAPI/carla/agents
-# export PYTHONPATH=$PYTHONPATH:${CARLA_ROOT}/PythonAPI/carla/dist/carla-0.9.13-py3.7-linux-x86_64.egg
-export PYTHONPATH=$PYTHONPATH:${CARLA_ROOT}/PythonAPI/carla/dist/carla-0.9.13-py3.8-linux-x86_64.egg
-# to export python into python workspace
-export PYTHONPATH=${PYTHONPATH}:${SCENARIO_RUNNER_ROOT}:${LEADERBOARD_ROOT}
-# use fast DDS instead of cyclone DDS to avoid broadcasting to all LAN
+# ROS
 source /opt/ros/galactic/setup.zsh
 export RCUTILS_COLORIZED_OUTPUT=1
 export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 # export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
-# setup seperate ros domain for running carla-autoware
+export LIBGL_ALWAYS_SOFTWARE=1 # rviz2
+export CYCLONEDDS_URI=$HOME/.config/cyclonedds.xml
 export ROS_DOMAIN_ID=5
-
-# setup workspace for carla_autoware
-export CARLA_AUTOWARE_ROOT=/home/cjh/Project/carla-autoware-stable
-export CARLA_AUTOWARE_DOCKER_ROOT=/home/cjh/Project/carla-autoware-docker
-# source /home/cjh/Software/powerlevel10k/powerlevel10k.zsh-theme
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-export LIBGL_ALWAYS_SOFTWARE=1
-export APOLLO_ROOT_DIR=/home/cjh/Project/apollo
-export CYCLONEDDS_URI=/home/cjh/Project/autoware/cyclonedds.xml
-export SUMO_HOME=/usr/share/sumo
-
-alias carla="/home/cjh/Project/CARLA_0.9.13-2023.11.17/CarlaUE4.sh"
-alias ego="cd /home/cjh/Project/carla-ros-bridge && source install/setup.zsh && ros2 launch carla_ros_bridge carla_ros_bridge_with_example_ego_vehicle.launch.py"
-alias autoware="cd /home/cjh/Project/autoware && source install/setup.zsh && ros2 launch autoware_launch autoware_carla.launch.xml vehicle_model:=igv_vehicle sensor_model:=carla_sensor_kit map_path:=/home/cjh/Project/map/custom_junctions_with_boundary"
-alias aa="cd /home/cjh/Project/apollo-modules-ros2 && source install/setup.zsh && ros2 launch apollo_autoware_bridge aa_bridge_launch.xml"
 alias rr="ros2 daemon stop && ros2 daemon start"
+alias no="source /opt/ros/noetic/setup.zsh"
+alias ga="source /opt/ros/galactic/setup.zsh"
+alias fo="source /opt/ros/foxy/setup.zsh"
+function kros(){
+  ps -ef | grep ros | grep -v grep | awk {'print"kill -9 " $2'} | sh
+}
 
-alias m="python3 /home/cjh/Project/carla_test/main.py"
 
-# check if fasd is installed
-if (( ! ${+commands[fasd]} )); then
-  return
-fi
+# software 
+alias zotero="sh ~/Software/Zotero_linux-x86_64/zotero"
+alias t="tmux"
+alias clion="sh $HOME/Software/clion-2023.1.2/bin/clion.sh"
+alias pycharm="sh $HOME/Software/pycharm-2023.1.2/bin/pycharm.sh"
+alias p="cat ~/.pwd"
+alias xo="xdg-open"
+function k(){
+  ps -ef | grep $1 | grep -v grep | awk {'print"kill -9 " $2'} | sh
+}
 
-fasd_cache="${ZSH_CACHE_DIR}/fasd-init-cache"
-if [[ "$commands[fasd]" -nt "$fasd_cache" || ! -s "$fasd_cache" ]]; then
-  fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install \
-    zsh-wcomp zsh-wcomp-install >| "$fasd_cache"
-fi
-source "$fasd_cache"
-unset fasd_cache
+# carla
+export UE4_ROOT=~/Software/UnrealEngine_4.26  # source code
+export CARLA_ROOT=$HOME/Project/CARLA_0.9.13-2023.12.27
+export PYTHONPATH=$PYTHONPATH:${CARLA_ROOT}/PythonAPI/carla/dist/carla-0.9.13-py3.8-linux-x86_64.egg
+alias carla="$HOME/Project/CARLA_0.9.13-2023.12.27/CarlaUE4.sh"
 
-alias v='f -e "$EDITOR"'
-alias o='a -e xdg-open'
-alias j='zz'
+# op_bridge(deprecated)
+#export SCENARIO_RUNNER_ROOT=$HOME/Project/carla-autoware-stable/scenario_runner
+#export LEADERBOARD_ROOT=$HOME/Project/carla-autoware-stable/op_bridge
+#export TEAM_CODE_ROOT=$HOME/Project/carla-autoware-stable/op_agent
+#export PYTHONPATH=$PYTHONPATH:${CARLA_ROOT}/PythonAPI
+#export PYTHONPATH=$PYTHONPATH:${CARLA_ROOT}/PythonAPI/util
+#export PYTHONPATH=$PYTHONPATH:${CARLA_ROOT}/PythonAPI/carla
+#export PYTHONPATH=$PYTHONPATH:${CARLA_ROOT}/PythonAPI/carla/agents
+## to export python into python workspace
+#export PYTHONPATH=${PYTHONPATH}:${SCENARIO_RUNNER_ROOT}:${LEADERBOARD_ROOT}
+## setup workspace for carla_autoware
+#export CARLA_AUTOWARE_ROOT=$HOME/Project/carla-autoware-stable
+#export CARLA_AUTOWARE_DOCKER_ROOT=$HOME/Project/carla-autoware-docker
 
-# Add TeX Live to the PATH, MANPATH, INFOPATH
+# carla-ros-bridge
+alias ego="cd $HOME/Project/carla-ros-bridge && source install/setup.zsh && ros2 launch carla_ros_bridge carla_ros_bridge_with_example_ego_vehicle.launch.py"
+
+# autoware
+alias autoware="cd $HOME/Project/autoware && source install/setup.zsh && ros2 launch autoware_launch autoware_carla.launch.xml vehicle_model:=igv_vehicle sensor_model:=carla_sensor_kit map_path:=$HOME/Project/map/simple_map_custom_junctions" # custom_junctions_with_boundary"
+
+# apollo
+export APOLLO_ROOT_DIR=$HOME/Project/apollo
+alias aa="cd $HOME/Project/apollo-modules-ros2 && source install/setup.zsh && ros2 launch apollo_autoware_bridge aa_bridge_launch.xml"
+
+# sumo
+export SUMO_HOME=/usr/share/sumo
+alias co="cd $HOME/Project/autoware && source install/setup.zsh && ros2 launch sumo_autoware_bridge co-simulation.launch.xml"
+function lane_change(){
+    cd $HOME/Project/autoware && source install/setup.zsh && ros2 launch sumo_autoware_bridge sumo_ros_bridge.launch.xml scenario:=lane_change example_num:=$1 departure_interval:=30
+}
+function crossroad(){
+    cd $HOME/Project/autoware && source install/setup.zsh && ros2 launch sumo_autoware_bridge sumo_ros_bridge.launch.xml scenario:=crossroad example_num:=$1 departure_interval:=10 flow_num:=0
+}
+
+# docker
+function docker_re() {
+docker start $1 && docker attach $1
+}
+
+# Tex
 export PATH=/usr/local/texlive/2023/bin/x86_64-linux:$PATH
 export MANPATH=/usr/local/texlive/2023/texmf-dist/doc/man:$MANPATH
 export INFOPATH=/usr/local/texlive/2023/texmf-dist/doc/info:$INFOPATH
 
-source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
+# ros2 autocomplete
+#source /usr/share/colcon_cd/function/colcon_cd.sh
+#export _colcon_cd_root=/opt/ros/galactic/
+#source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
 eval "$(register-python-argcomplete3 ros2)"
 eval "$(register-python-argcomplete3 colcon)"
+# autocomplete after source
+alias si="source install/setup.zsh && complete -o nospace -o default -F _python_argcomplete ros2 && complete -o nospace -o default -F _python_argcomplete colcon"
+
+# zsh
+alias gz="gedit ~/.zshrc"
+alias sz="source ~/.zshrc"
+alias zsh_reload="exec zsh"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

@@ -152,7 +152,7 @@ source /opt/ros/galactic/setup.zsh
 export RCUTILS_COLORIZED_OUTPUT=1
 export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 # export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
-export LIBGL_ALWAYS_SOFTWARE=1 # rviz2
+# export LIBGL_ALWAYS_SOFTWARE=1 # rviz2
 export CYCLONEDDS_URI=$HOME/.config/cyclonedds.xml
 export ROS_DOMAIN_ID=5
 alias rr="ros2 daemon stop && ros2 daemon start"

@@ -168,7 +168,7 @@ function kros(){
 alias zotero="sh ~/Software/Zotero_linux-x86_64/zotero"
 alias t="tmux"
 alias clion="sh $HOME/Software/clion-2023.1.2/bin/clion.sh"
-alias pycharm="sh $HOME/Software/pycharm-2023.1.2/bin/pycharm.sh"
+alias pycharm="sh $HOME/Software/pycharm-2023.1.5/bin/pycharm.sh"
 alias p="cat ~/.pwd"
 alias xo="xdg-open"
 function k(){
@@ -177,9 +177,9 @@ function k(){
 
 # carla
 export UE4_ROOT=~/Software/UnrealEngine_4.26  # source code
-export CARLA_ROOT=$HOME/Project/CARLA_0.9.13-2023.12.27
+export CARLA_ROOT=$HOME/Project/CARLA_0.9.13-2024.1.21
 export PYTHONPATH=$PYTHONPATH:${CARLA_ROOT}/PythonAPI/carla/dist/carla-0.9.13-py3.8-linux-x86_64.egg
-alias carla="$HOME/Project/CARLA_0.9.13-2023.12.27/CarlaUE4.sh"
+alias carla="$HOME/Project/CARLA_0.9.13-2024.4.15/CarlaUE4.sh"
 
 # op_bridge(deprecated)
 #export SCENARIO_RUNNER_ROOT=$HOME/Project/carla-autoware-stable/scenario_runner
@@ -199,7 +199,11 @@ alias carla="$HOME/Project/CARLA_0.9.13-2023.12.27/CarlaUE4.sh"
 alias ego="cd $HOME/Project/carla-ros-bridge && source install/setup.zsh && ros2 launch carla_ros_bridge carla_ros_bridge_with_example_ego_vehicle.launch.py"
 
 # autoware
-alias autoware="cd $HOME/Project/autoware && source install/setup.zsh && ros2 launch autoware_launch autoware_carla.launch.xml vehicle_model:=igv_vehicle sensor_model:=carla_sensor_kit map_path:=$HOME/Project/map/simple_map_custom_junctions" # custom_junctions_with_boundary"
+alias autoware="cd $HOME/Project/autoware && source install/setup.zsh && ros2 launch autoware_launch autoware_carla.launch.xml vehicle_model:=igv_vehicle sensor_model:=carla_sensor_kit map_path:=$HOME/Project/map/simple_map_custom_junctions" # nansha_map_left_bottom"
+
+alias autoware_ns="cd $HOME/Project/autoware && source install/setup.zsh && ros2 launch autoware_launch autoware_carla.launch.xml vehicle_model:=igv_vehicle sensor_model:=carla_sensor_kit map_path:=$HOME/Project/map/nansha_map_left_bottom"
+
+alias autoware_nsf="cd $HOME/Project/autoware && source install/setup.zsh && ros2 launch autoware_launch autoware_carla.launch.xml vehicle_model:=igv_vehicle sensor_model:=carla_sensor_kit map_path:=$HOME/Project/map/nansha_map_full"
 
 # apollo
 export APOLLO_ROOT_DIR=$HOME/Project/apollo
@@ -241,3 +245,9 @@ alias zsh_reload="exec zsh"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# habitat-conda
+export PYTHONPATH=$PYTHONPATH:/home/cjh/Explore_plan/habitat-conda/habitat-sim
+
+# todesk reinstall
+alias reinstall_todesk="sudo apt remove --purge todesk -y && sudo dpkg -i ~/下载/todesk-v4.7.2.0-amd64.deb"

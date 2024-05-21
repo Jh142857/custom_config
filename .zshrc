@@ -177,9 +177,9 @@ function k(){
 
 # carla
 export UE4_ROOT=~/Software/UnrealEngine_4.26  # source code
-export CARLA_ROOT=$HOME/Project/CARLA_0.9.13-2024.1.21
+export CARLA_ROOT=$HOME/Project/CARLA_0.9.13-2024.5.21
 export PYTHONPATH=$PYTHONPATH:${CARLA_ROOT}/PythonAPI/carla/dist/carla-0.9.13-py3.8-linux-x86_64.egg
-alias carla="$HOME/Project/CARLA_0.9.13-2024.4.15/CarlaUE4.sh"
+alias carla="$HOME/Project/CARLA_0.9.13-2024.5.21/CarlaUE4.sh"
 
 # op_bridge(deprecated)
 #export SCENARIO_RUNNER_ROOT=$HOME/Project/carla-autoware-stable/scenario_runner
@@ -199,11 +199,14 @@ alias carla="$HOME/Project/CARLA_0.9.13-2024.4.15/CarlaUE4.sh"
 alias ego="cd $HOME/Project/carla-ros-bridge && source install/setup.zsh && ros2 launch carla_ros_bridge carla_ros_bridge_with_example_ego_vehicle.launch.py"
 
 # autoware
-alias autoware="cd $HOME/Project/autoware && source install/setup.zsh && ros2 launch autoware_launch autoware_carla.launch.xml vehicle_model:=igv_vehicle sensor_model:=carla_sensor_kit map_path:=$HOME/Project/map/simple_map_custom_junctions" # nansha_map_left_bottom"
+# for simulation
+alias autoware="cd $HOME/Project/autoware && source install/setup.zsh && ros2 launch autoware_launch autoware_carla.launch.xml vehicle_model:=igv_vehicle sensor_model:=carla_sensor_kit map_path:=$HOME/Project/map/simple_map_custom_junctions"
 
-alias autoware_ns="cd $HOME/Project/autoware && source install/setup.zsh && ros2 launch autoware_launch autoware_carla.launch.xml vehicle_model:=igv_vehicle sensor_model:=carla_sensor_kit map_path:=$HOME/Project/map/nansha_map_left_bottom"
+# for nansha_map
+alias autoware_ns="cd $HOME/Project/autoware && source install/setup.zsh && ros2 launch autoware_launch autoware_carla.launch.xml vehicle_model:=igv_vehicle sensor_model:=carla_sensor_kit map_path:=$HOME/Project/map/nansha_map_normal"
 
-alias autoware_nsf="cd $HOME/Project/autoware && source install/setup.zsh && ros2 launch autoware_launch autoware_carla.launch.xml vehicle_model:=igv_vehicle sensor_model:=carla_sensor_kit map_path:=$HOME/Project/map/nansha_map_full"
+# for nansha_map_left_bottom
+alias autoware_lb="cd $HOME/Project/autoware && source install/setup.zsh && ros2 launch autoware_launch autoware_carla.launch.xml vehicle_model:=igv_vehicle sensor_model:=carla_sensor_kit map_path:=$HOME/Project/map/nansha_map_left_bottom_normal"
 
 # apollo
 export APOLLO_ROOT_DIR=$HOME/Project/apollo
